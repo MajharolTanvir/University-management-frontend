@@ -6,6 +6,7 @@ import Image from "next/image";
 import Forms from "@/components/Forms/Forms";
 import FormInput from "@/components/Forms/FormInput";
 import { SubmitHandler } from "react-hook-form";
+import { useUserLoginMutation } from "@/redux/Api/AuthApi";
 
 type FromValues = {
   id: string;
@@ -13,9 +14,12 @@ type FromValues = {
 };
 
 const Login = () => {
-  const onSubmit: SubmitHandler<FromValues> = (data) => {
+  const [userLogin] = useUserLoginMutation();
+
+  const onSubmit: SubmitHandler<FromValues> = async (data: FromValues) => {
     try {
-      console.log(data);
+      const res = await userLogin({ ...data });
+      console.log(res);
     } catch (error) {}
   };
 
@@ -28,7 +32,7 @@ const Login = () => {
         <h1
           style={{
             margin: "15px 0px",
-            fontFamily: 'cursive'
+            fontFamily: "cursive",
           }}
         >
           First login on your account
