@@ -1,4 +1,4 @@
-import { Row } from "antd";
+import { Button, Col, Row } from "antd";
 import Image from "next/image";
 import React from "react";
 import errorImage from "../assets/Error.gif";
@@ -10,9 +10,12 @@ const NotFound = () => {
       align="middle"
       style={{ minHeight: "100vh", background: "#1a183f" }}
     >
-      <a href="/">
+      <Col>
         <Image src={errorImage} width={600} alt="Error image" />
-      </a>
+        <h3 style={{ textAlign: "center" }}>
+          <a href="/">Go back to home page</a>
+        </h3>
+      </Col>
     </Row>
   );
 };

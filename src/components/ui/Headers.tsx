@@ -3,6 +3,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 import { removeUserInfo } from "@/services/auth.services";
 import { authKey } from "@/constant/storageKey";
+import "../css/custom-dropdown.css";
 
 const { Header } = Layout;
 
@@ -17,7 +18,7 @@ const Headers = () => {
     {
       key: "0",
       label: (
-        <Button onClick={logout} type="text" danger>
+        <Button onClick={logout} type="text" style={{color: 'white'}}>
           Logout
         </Button>
       ),

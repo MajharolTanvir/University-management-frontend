@@ -4,8 +4,8 @@ import { useState } from "react";
 import { Layout, Menu } from "antd";
 import { SidebarItems } from "@/constant/sidebarItems";
 import { USER_ROLE } from "@/constant/role";
-import "./custom-menu.css";
-import "./custom-sider.css";
+import "../css/custom-menu.css";
+import "../css/custom-sider.css";
 import { getUserInfo } from "@/services/auth.services";
 
 const { Sider } = Layout;
