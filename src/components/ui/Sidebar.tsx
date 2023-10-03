@@ -4,10 +4,13 @@ import { useState } from "react";
 import { Layout, Menu } from "antd";
 import { SidebarItems } from "@/constant/sidebarItems";
 import { USER_ROLE } from "@/constant/role";
+import "./custom-menu.css";
+import "./custom-sider.css";
+import { getUserInfo } from "@/services/auth.services";
 
 const { Sider } = Layout;
 
-const role = USER_ROLE.ADMIN
+const { role } = getUserInfo() as any;
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -24,25 +27,32 @@ const Sidebar = () => {
         left: 0,
         top: 0,
         bottom: 0,
+        background: "#201d48",
       }}
     >
-      <div
-        style={{
-          color: "white",
-          fontSize: "2rem",
-          textAlign: "center",
-          fontWeight: "bold",
-          marginBottom: "1rem",
-          marginTop: "1rem",
-        }}
-      >
-        PH-University
-      </div>
+      {!collapsed && (
+        <div
+          style={{
+            color: "white",
+            fontSize: "1.5rem",
+            textAlign: "center",
+            fontWeight: "bold",
+            marginBottom: "1rem",
+            marginTop: "1rem",
+          }}
+        >
+          PH-University
+        </div>
+      )}
+
       <Menu
-        theme="dark"
         defaultSelectedKeys={["1"]}
         mode="inline"
         items={SidebarItems(role)}
+        style={{
+          color: "white",
+          background: "#201d48",
+        }}
       />
     </Sider>
   );

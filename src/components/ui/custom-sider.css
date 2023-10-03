@@ -1,0 +1,7 @@
+.ant-layout-sider-collapsed .ant-layout-sider-trigger {
+    background: #201d48;
+}
+
+.ant-layout-sider:not(.ant-layout-sider-collapsed) .ant-layout-sider-trigger {
+  background: #201d48;
+}
