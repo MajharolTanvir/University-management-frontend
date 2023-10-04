@@ -1,0 +1,17 @@
+.ant-upload {
+  color: #ffffff;
+}
+.ant-upload:hover {
+  color: #ffffff;
+}
+
+:where(
+    .css-dev-only-do-not-override-1vr7spz
+  ).ant-upload-wrapper.ant-upload-picture-card-wrapper
+  .ant-upload.ant-upload-select,
+:where(
+    .css-dev-only-do-not-override-1vr7spz
+  ).ant-upload-wrapper.ant-upload-picture-circle-wrapper
+  .ant-upload.ant-upload-select {
+  border: 1px dotted ;
+}

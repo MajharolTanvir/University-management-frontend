@@ -32,7 +32,11 @@ const LoginCompo = () => {
   };
 
   return (
-    <Row style={{ minHeight: "100vh", color: "white", background: "#1a183f" }} justify="center" align="middle">
+    <Row
+      style={{ minHeight: "100vh", color: "white", background: "#1a183f" }}
+      justify="center"
+      align="middle"
+    >
       <Col sm={12} md={16} lg={10}>
         <Image src={loginImage} width={600} alt="Login image" />
       </Col>

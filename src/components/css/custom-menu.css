@@ -6,10 +6,7 @@
   color: #14b9e4;
 }
 
-.ant-menu-title-content:active {
+.ant-menu .ant-menu-item-selected {
   color: #14b9e4;
-}
-
-.ant-menu-item:active .anticon {
-  color: #14b9e4;
+  background-color: #1A183F;
 }
