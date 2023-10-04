@@ -15,6 +15,7 @@ interface IStepsProps {
   steps: ISteps[];
   submitHandler: (el: any) => void;
   navigateLink?: string;
+  resolver?: any;
 }
 
 const StepperForm = ({ steps, submitHandler, navigateLink }: IStepsProps) => {

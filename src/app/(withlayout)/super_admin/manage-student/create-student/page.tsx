@@ -1,10 +1,12 @@
-"use client"
+"use client";
 import StepperForm from "@/components/StepperForm/StepperForm";
 import StudentBasicInfoForm from "@/components/StudentInfo/StudentBasicInfoForm";
 import StudentGuardianInfoForm from "@/components/StudentInfo/StudentGuardianInfoForm";
 import StudentInfoForm from "@/components/StudentInfo/StudentForm";
 import StudentLocalGuardianInfoForm from "@/components/StudentInfo/StudentLocalGuardianInfoForm";
 import React from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { studentSchema } from "@/schemas/studentSchema";
 
 const steps = [
   {
@@ -40,6 +42,7 @@ const CreateStudent = () => {
       <StepperForm
         steps={steps}
         submitHandler={(value) => handleStudentSubmit(value)}
+        resolver={yupResolver(studentSchema)}
       />
     </div>
   );

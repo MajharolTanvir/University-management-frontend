@@ -22,6 +22,15 @@ const StudentInfoForm = () => {
         marginTop: "10px",
       }}
     >
+      <p
+        style={{
+          fontSize: "18px",
+          fontWeight: "bold",
+          marginBottom: "10px",
+        }}
+      >
+        Student information
+      </p>
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
         <Col
           className="gutter-row"
