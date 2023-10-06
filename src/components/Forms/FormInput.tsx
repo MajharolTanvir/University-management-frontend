@@ -62,7 +62,7 @@ const FormInput = ({
               type={type}
               size={size}
               placeholder={placeholder}
-              value={value ? value : field.value}
+                value={value ? value : field.value}
             />
           )
         }

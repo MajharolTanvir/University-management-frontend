@@ -5,17 +5,25 @@ import FormSelectFields from "@/components/Forms/FormSelectFields";
 import FormTextArea from "@/components/Forms/FormTextArea";
 import Forms from "@/components/Forms/Forms";
 import UploadImage from "@/components/ui/uploadImage";
-import {
-  bloodGroupOptions,
-  departmentOptions,
-  genderOptions,
-} from "@/constant/global";
+import { bloodGroupOptions, genderOptions } from "@/constant/global";
+import { useDepartmentsQuery } from "@/redux/Api/department";
 import { adminSchema } from "@/schemas/adminSchema";
+import { IDepartment } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Col, Row } from "antd";
 import React from "react";
 
 const CreateAdmin = () => {
+  const { data, isLoading } = useDepartmentsQuery({ limit: 100, page: 1 });
+  //@ts-ignore
+  const departments: IDepartment[] = data?.departments;
+
+  const departmentOptions = departments?.map((department) => {
+    return {
+      label: department?.title,
+      value: department?.id,
+    };
+  });
   const onSubmit = async (data: any) => {
     try {
       console.log(data);
@@ -144,7 +152,7 @@ const CreateAdmin = () => {
                   marginBottom: "10px",
                 }}
               >
-                <UploadImage />
+                <UploadImage name="file" />
               </Col>
             </Row>
           </div>
