@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import ActionBar from "@/components/ui/ActionBar";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import UMTable from "@/components/ui/UMTable";
@@ -13,34 +13,33 @@ import {
 } from "@ant-design/icons";
 import dayjs from "dayjs";
 import ModelPage from "@/components/ui/model";
-import { useAdminsQuery } from "@/redux/Api/admin";
+import { useAdminsQuery, useDeleteAdminMutation } from "@/redux/Api/admin";
 import { IDepartment } from "@/types";
 
-
 const Admin = () => {
+  const query: Record<string, any> = {};
 
-    const query: Record<string, any> = {};
+  const [page, setPage] = useState<number>(1);
+  const [size, setSize] = useState<number>(10);
+  const [sortBy, setSortBy] = useState<string>("");
+  const [sortOrder, setSortOrder] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [deleteAdmin] = useDeleteAdminMutation();
 
-    const [page, setPage] = useState<number>(1);
-    const [size, setSize] = useState<number>(10);
-    const [sortBy, setSortBy] = useState<string>("");
-    const [sortOrder, setSortOrder] = useState<string>("");
-    const [searchTerm, setSearchTerm] = useState<string>("");
-
-    query["limit"] = size;
-    query["page"] = page;
-    query["sortBy"] = sortBy;
-    query["sortOrder"] = sortOrder;
+  query["limit"] = size;
+  query["page"] = page;
+  query["sortBy"] = sortBy;
+  query["sortOrder"] = sortOrder;
 
   const { data, isLoading } = useAdminsQuery({ ...query });
-  console.log(data)
-    const admin = data?.admins;
-    const meta = data?.meta;
-  
+
+  const admin = data?.admins;
+  const meta = data?.meta;
+
   const deleteHandler = async (id: string) => {
     message.loading("Deleting.....");
     try {
-      // await deleteDepartment(id);
+      await deleteAdmin(id);
       message.success("Admin deleted successfully");
     } catch (err: any) {
       message.error(err.message);
@@ -134,8 +133,6 @@ const Admin = () => {
     setSortOrder("");
     setSearchTerm("");
   };
-
-
 
   return (
     <div>

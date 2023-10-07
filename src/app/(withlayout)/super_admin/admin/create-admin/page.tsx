@@ -42,7 +42,6 @@ const CreateAdmin = () => {
     message.loading("Creating...");
 
     try {
-      console.log(data);
       await addAdmin(formData);
       message.success("Admin added successfully");
     } catch (error: any) {
