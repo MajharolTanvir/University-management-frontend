@@ -31,38 +31,37 @@ export const departmentOptions = [
 export const bloodGroupOptions = [
   {
     label: "A+",
-    value: "a+",
-  },
-  {
-    label: "B+",
-    value: "b+",
-  },
-  {
-    label: "O+",
-    value: "o+",
-  },
-  {
-    label: "AB+",
-    value: "ab+",
+    value: "A+",
   },
   {
     label: "A-",
-    value: "a-",
+    value: "A-",
+  },
+  {
+    label: "B+",
+    value: "B+",
   },
   {
     label: "B-",
-    value: "b-",
+    value: "B-",
   },
   {
-    label: "O+",
-    value: "o+",
+    label: "AB+",
+    value: "AB+",
   },
   {
     label: "AB-",
-    value: "ab-",
+    value: "AB-",
+  },
+  {
+    label: "O+",
+    value: "O+",
+  },
+  {
+    label: "O-",
+    value: "O-",
   },
 ];
-
 
 
 export const acFacultyOptions = [

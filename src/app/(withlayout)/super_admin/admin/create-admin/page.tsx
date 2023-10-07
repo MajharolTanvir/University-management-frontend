@@ -4,17 +4,22 @@ import FormInput from "@/components/Forms/FormInput";
 import FormSelectFields from "@/components/Forms/FormSelectFields";
 import FormTextArea from "@/components/Forms/FormTextArea";
 import Forms from "@/components/Forms/Forms";
+import ActionBar from "@/components/ui/ActionBar";
+import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import UploadImage from "@/components/ui/uploadImage";
 import { bloodGroupOptions, genderOptions } from "@/constant/global";
+import { useAddAdminMutation } from "@/redux/Api/admin";
 import { useDepartmentsQuery } from "@/redux/Api/department";
 import { adminSchema } from "@/schemas/adminSchema";
 import { IDepartment } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Col, Row } from "antd";
+import { Button, Col, Row, message } from "antd";
 import React from "react";
 
 const CreateAdmin = () => {
   const { data, isLoading } = useDepartmentsQuery({ limit: 100, page: 1 });
+  const [addAdmin] = useAddAdminMutation();
+
   //@ts-ignore
   const departments: IDepartment[] = data?.departments;
 
@@ -24,20 +29,42 @@ const CreateAdmin = () => {
       value: department?.id,
     };
   });
-  const onSubmit = async (data: any) => {
+
+  const onSubmit = async (values: any) => {
+    const obj = { ...values };
+    const file = obj["file"];
+    delete obj["file"];
+    const data = JSON.stringify(obj);
+    const formData = new FormData();
+
+    formData.append("file", file as Blob);
+    formData.append("data", data);
+    message.loading("Creating...");
+
     try {
       console.log(data);
-    } catch (error) {
-      console.error(error);
+      await addAdmin(formData);
+      message.success("Admin added successfully");
+    } catch (error: any) {
+      message.error(error.message);
     }
   };
 
   return (
     <div>
-      <h1 style={{ fontFamily: "cursive", margin: "10px 0px" }}>
-        Create admin
-      </h1>
-      <div>
+      <UMBreadCrumb
+        items={[
+          {
+            label: "Super_admin",
+            link: "/super_admin",
+          },
+          {
+            label: "Admin",
+            link: "/super_admin/admin",
+          },
+        ]}
+      />
+      <ActionBar title="Create admin">
         <Forms submitHandler={onSubmit} resolver={yupResolver(adminSchema)}>
           <div
             style={{
@@ -254,7 +281,7 @@ const CreateAdmin = () => {
               >
                 <FormSelectFields
                   size="large"
-                  name="admin.gender"
+                  name="admin.bloodGroup"
                   options={bloodGroupOptions}
                   placeholder="Select a Blood group"
                   label="Blood group"
@@ -293,7 +320,7 @@ const CreateAdmin = () => {
             Submit
           </Button>
         </Forms>
-      </div>
+      </ActionBar>
     </div>
   );
 };
