@@ -3,7 +3,7 @@
 import { Select } from "antd";
 import { useFormContext, Controller } from "react-hook-form";
 
-interface ISelectFieldOptions {
+export interface ISelectFieldOptions {
   label: string;
   value: string;
 }
@@ -56,6 +56,7 @@ const FormSelectFields = ({
             style={{
               width: "100%",
             }}
+            defaultValue={defaultValue}
           ></Select>
         )}
       />

@@ -1,8 +1,20 @@
 export enum TagTypes {
-    user = 'user',
-    department = 'department',
-    faculty = 'faculty',
-    admin = 'admin'
+  user = "user",
+  department = "department",
+  faculty = "faculty",
+  admin = "admin",
+  student = "student",
+  academicFaculty = "academic-faculty",
+  academicDepartment = "academic-department",
+  academicSemester = "academic-semester",
+  building = "building",
+  room = "room",
+  course = "course",
+  semesterRegistration = "semester-registration",
+  offeredCourse = "offered-course",
+  offeredCourseSection = "offered-course-section",
+  offeredCourseSchedule = "offered-course-schedule",
+  courseRegistration = "course-registration",
 }
 
 export const tagTypeList = [
@@ -10,4 +22,16 @@ export const tagTypeList = [
   TagTypes.department,
   TagTypes.faculty,
   TagTypes.admin,
+  TagTypes.student,
+  TagTypes.academicFaculty,
+  TagTypes.academicDepartment,
+  TagTypes.academicSemester,
+  TagTypes.building,
+  TagTypes.room,
+  TagTypes.course,
+  TagTypes.semesterRegistration,
+  TagTypes.offeredCourse,
+  TagTypes.offeredCourseSection,
+  TagTypes.offeredCourseSchedule,
+  TagTypes.courseRegistration,
 ];
