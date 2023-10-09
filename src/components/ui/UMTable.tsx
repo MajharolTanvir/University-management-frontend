@@ -1,6 +1,7 @@
 "use client";
 
 import { Table } from "antd";
+import '../css/custom-pagination.css'
 
 type UMTableProps = {
   loading?: boolean;

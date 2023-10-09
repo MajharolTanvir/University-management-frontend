@@ -1,0 +1,15 @@
+.ant-pagination .ant-pagination-item {
+  background-color: #b5b5b5;
+}
+
+.ant-pagination-item.ant-pagination-item-active {
+  background-color: white;
+}
+
+.ant-pagination-item-link span {
+    color: white
+}
+
+.ant-pagination .ant-pagination-item:not(:active):hover {
+  background-color: #ffffff;
+}
