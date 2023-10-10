@@ -5,16 +5,16 @@ import {
   ReloadOutlined,
 } from "@ant-design/icons";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
-import UMTable from "@/components/ui/UMTable";
 import { Button, Input, message } from "antd";
 import Link from "next/link";
 import { useState } from "react";
 import ActionBar from "@/components/ui/ActionBar";
 import dayjs from "dayjs";
 import { useDebounced } from "@/redux/hook";
-import { useBuildingsQuery, useDeleteBuildingMutation } from "@/redux/Api/buildingApi";
+import { useDeleteRoomMutation, useRoomsQuery } from "@/redux/Api/roomApi";
+import UMTable from "@/components/ui/UMTable";
 
-const ManageBuildingPage = () => {
+const RoomPage = () => {
   const query: Record<string, any> = {};
 
   const [page, setPage] = useState<number>(1);
@@ -22,13 +22,12 @@ const ManageBuildingPage = () => {
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [deleteBuilding] = useDeleteBuildingMutation();
+  const [deleteRoom] = useDeleteRoomMutation();
 
   query["limit"] = size;
   query["page"] = page;
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
-  // query["searchTerm"] = searchTerm;
 
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
@@ -38,28 +37,41 @@ const ManageBuildingPage = () => {
   if (!!debouncedTerm) {
     query["searchTerm"] = debouncedTerm;
   }
-  const { data, isLoading } = useBuildingsQuery({ ...query });
 
-  const buildings = data?.buildings;
-  console.log('buildings: ',buildings)
+    const { data, isLoading } = useRoomsQuery({ ...query });
+    const rooms = data?.rooms;
+    
   const meta = data?.meta;
 
   const deleteHandler = async (id: string) => {
     message.loading("Deleting.....");
     try {
-      //   console.log(data);
-      await deleteBuilding(id);
-      message.success("Building Deleted successfully");
+      const res = await deleteRoom(id);
+      if (res) {
+        message.success("Room Deleted successfully");
+      }
     } catch (err: any) {
-      //   console.error(err.message);
       message.error(err.message);
     }
   };
 
   const columns = [
     {
-      title: "Title",
-      dataIndex: "title",
+      title: "Room no",
+      dataIndex: "roomNumber",
+      sorter: true,
+    },
+    {
+      title: "Floor",
+      dataIndex: "floor",
+      sorter: true,
+    },
+    {
+      title: "Building",
+      dataIndex: "building",
+      render: function (data: any) {
+        return <>{data?.title}</>;
+      },
     },
     {
       title: "CreatedAt",
@@ -74,7 +86,7 @@ const ManageBuildingPage = () => {
       render: function (data: any) {
         return (
           <>
-            <Link href={`/admin/building/edit/${data?.id}`}>
+            <Link href={`/admin/room/edit/${data?.id}`}>
               <Button
                 style={{
                   margin: "0px 5px",
@@ -102,6 +114,7 @@ const ManageBuildingPage = () => {
     setPage(page);
     setSize(pageSize);
   };
+
   const onTableChange = (pagination: any, filter: any, sorter: any) => {
     const { order, field } = sorter;
     setSortBy(field as string);
@@ -113,7 +126,6 @@ const ManageBuildingPage = () => {
     setSortOrder("");
     setSearchTerm("");
   };
-
   return (
     <div>
       <UMBreadCrumb
@@ -125,7 +137,7 @@ const ManageBuildingPage = () => {
         ]}
       />
 
-      <ActionBar title="Building List">
+      <ActionBar title="Room List">
         <Input
           type="text"
           size="large"
@@ -138,7 +150,7 @@ const ManageBuildingPage = () => {
           }}
         />
         <div>
-          <Link href="/admin/building/create-building">
+          <Link href="/admin/room/create-room">
             <Button type="primary">Create</Button>
           </Link>
           {(!!sortBy || !!sortOrder || !!searchTerm) && (
@@ -156,7 +168,7 @@ const ManageBuildingPage = () => {
       <UMTable
         loading={isLoading}
         columns={columns}
-        dataSource={buildings}
+        dataSource={rooms}
         pageSize={size}
         totalPages={meta?.total}
         showSizeChanger={true}
@@ -168,4 +180,4 @@ const ManageBuildingPage = () => {
   );
 };
 
-export default ManageBuildingPage;
+export default RoomPage;

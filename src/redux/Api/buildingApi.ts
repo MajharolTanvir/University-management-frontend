@@ -42,7 +42,7 @@ export const buildingApi = baseApi.injectEndpoints({
     }),
     // update existing building
     updateBuilding: build.mutation({
-      query: (data: { id: any; body: any; }) => ({
+      query: (data: { id: any; body: any }) => ({
         url: `${BUILDING_URL}/${data.id}`,
         method: "PATCH",
         data: data.body,

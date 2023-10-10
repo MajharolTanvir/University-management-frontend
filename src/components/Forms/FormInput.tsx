@@ -66,6 +66,7 @@ const FormInput = ({
               size={size}
               placeholder={placeholder}
               value={value ? value : field.value}
+              defaultValue={defaultValue}
             />
           )
         }
