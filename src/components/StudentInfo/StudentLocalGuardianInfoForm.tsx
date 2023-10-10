@@ -1,88 +1,53 @@
 import { Col, Row } from "antd";
-import React from "react";
 import FormInput from "../Forms/FormInput";
 
-const StudentLocalGuardianInfoForm = () => {
+const LocalGuardianInfo = () => {
   return (
-    <div
-      style={{
-        border: "1px solid #ffffff",
-        borderRadius: "5px",
-        padding: "15px",
-        marginBottom: "10px",
-      }}
-    >
-      <p
+    <>
+      <div
         style={{
-          fontSize: "18px",
-          fontWeight: "bold",
+          border: "1px solid #d9d9d9",
+          borderRadius: "5px",
+          padding: "15px",
           marginBottom: "10px",
+          marginTop: "10px",
         }}
       >
-        Local guardian information
-      </p>
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-        <Col
-          className="gutter-row"
-          span={6}
-          style={{
-            marginBottom: "10px",
-          }}
-        >
-          <FormInput
-            type="text"
-            name="student.localGuardian.name"
-            size="large"
-            label="Local guardian Name"
-          />
-        </Col>
-        <Col
-          className="gutter-row"
-          span={6}
-          style={{
-            marginBottom: "10px",
-          }}
-        >
-          <FormInput
-            type="text"
-            name="student.localGuardian.occupation"
-            size="large"
-            label="Local guardian occupation"
-          />
-        </Col>
+        <p style={{ fontSize: "18px", fontWeight: "500", margin: "5px 0px" }}>
+          Guardian information
+        </p>
+        <Row gutter={{ xs: 24, xl: 8, lg: 8, md: 24 }}>
+          <Col span={6} style={{ margin: "10px 0" }}>
+            <FormInput
+              name="student.localGuardian.name"
+              label="Local guardian name"
+            />
+          </Col>
 
-        <Col
-          className="gutter-row"
-          span={6}
-          style={{
-            marginBottom: "10px",
-          }}
-        >
-          <FormInput
-            type="text"
-            name="student.localGuardian.contactNo"
-            size="large"
-            label="Local guardian contact no"
-          />
-        </Col>
+          <Col span={6} style={{ margin: "10px 0" }}>
+            <FormInput
+              name="student.localGuardian.occupation"
+              label="Local guardian occupation"
+            />
+          </Col>
 
-        <Col
-          className="gutter-row"
-          span={6}
-          style={{
-            marginBottom: "10px",
-          }}
-        >
-          <FormInput
-            type="text"
-            name="student.localGuardian.address"
-            size="large"
-            label="Local guardian address"
-          />
-        </Col>
-      </Row>
-    </div>
+          <Col span={6} style={{ margin: "10px 0" }}>
+            <FormInput
+              name="student.localGuardian.contactNo"
+              label="Local guardian contact no."
+            />
+          </Col>
+
+          <Col span={6} style={{ margin: "10px 0" }}>
+            <FormInput
+              name="student.localGuardian.address"
+              label="Local guardian address"
+            />
+          </Col>
+        </Row>
+      </div>
+    </>
   );
 };
 
-export default StudentLocalGuardianInfoForm;
+export default LocalGuardianInfo;

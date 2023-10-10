@@ -13,10 +13,10 @@ import { useState } from "react";
 import UMTable from "@/components/ui/UMTable";
 import { IDepartment } from "@/types";
 import dayjs from "dayjs";
-import { useFacultiesQuery } from "@/redux/Api/facultyApi";
+import { useStudentsQuery } from "@/redux/Api/studentApi";
 import { useDebounced } from "@/redux/hook";
 
-const FacultyPage = () => {
+const StudentPage = () => {
   const query: Record<string, any> = {};
 
   const [page, setPage] = useState<number>(1);
@@ -38,15 +38,16 @@ const FacultyPage = () => {
   if (!!debouncedSearchTerm) {
     query["searchTerm"] = debouncedSearchTerm;
   }
-  const { data, isLoading } = useFacultiesQuery({ ...query });
+  const { data, isLoading } = useStudentsQuery({ ...query });
 
-  const faculties = data?.faculties;
+  const students = data?.students;
   const meta = data?.meta;
+  // console.log(students);
 
   const columns = [
     {
       title: "Id",
-      dataIndex: "facultyId",
+      dataIndex: "studentId",
       sorter: true,
     },
     {
@@ -61,17 +62,6 @@ const FacultyPage = () => {
       dataIndex: "email",
     },
     {
-      title: "Department",
-      dataIndex: "academicDepartment",
-      render: function (data: IDepartment) {
-        return <>{data?.title}</>;
-      },
-    },
-    {
-      title: "Designation",
-      dataIndex: "designation",
-    },
-    {
       title: "Created at",
       dataIndex: "createdAt",
       render: function (data: any) {
@@ -84,17 +74,22 @@ const FacultyPage = () => {
       dataIndex: "contactNo",
     },
     {
+      title: "Gender",
+      dataIndex: "gender",
+      sorter: true,
+    },
+    {
       title: "Action",
       dataIndex: "id",
       render: function (data: any) {
         return (
           <>
-            <Link href={`/admin/manage-faculty/details/${data}`}>
+            <Link href={`/admin/manage-faculty/details/${data.id}`}>
               <Button onClick={() => console.log(data)} type="primary">
                 <EyeOutlined />
               </Button>
             </Link>
-            <Link href={`/admin/manage-faculty/edit/${data}`}>
+            <Link href={`/admin/manage-faculty/edit/${data.id}`}>
               <Button
                 style={{
                   margin: "0px 5px",
@@ -140,7 +135,7 @@ const FacultyPage = () => {
           },
         ]}
       />
-      <ActionBar title="Faculty List">
+      <ActionBar title="Student List">
         <Input
           size="large"
           placeholder="Search"
@@ -150,7 +145,7 @@ const FacultyPage = () => {
           }}
         />
         <div>
-          <Link href="/admin/manage-faculty/create-faculty">
+          <Link href="/admin/manage-student/create-student">
             <Button type="primary">Create</Button>
           </Link>
           {(!!sortBy || !!sortOrder || !!searchTerm) && (
@@ -168,7 +163,7 @@ const FacultyPage = () => {
       <UMTable
         loading={isLoading}
         columns={columns}
-        dataSource={faculties}
+        dataSource={students}
         pageSize={size}
         totalPages={meta?.total}
         showSizeChanger={true}
@@ -180,4 +175,4 @@ const FacultyPage = () => {
   );
 };
 
-export default FacultyPage;
+export default StudentPage;

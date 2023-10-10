@@ -1,132 +1,81 @@
-import { Col, Row } from 'antd';
-import React from 'react';
-import FormInput from '../Forms/FormInput';
-import FormTextArea from '../Forms/FormTextArea';
+import { Col, Row } from "antd";
+import FormInput from "../Forms/FormInput";
 
-const StudentGuardianInfoForm = () => {
-    return (
+const GuardianInfo = () => {
+  return (
+    <>
       <div
         style={{
-          border: "1px solid #ffffff",
+          border: "1px solid #d9d9d9",
           borderRadius: "5px",
           padding: "15px",
           marginBottom: "10px",
+          marginTop: "10px",
         }}
       >
-        <p
-          style={{
-            fontSize: "18px",
-            fontWeight: "bold",
-            marginBottom: "10px",
-          }}
-        >
+        <p style={{ fontSize: "18px", fontWeight: "500", margin: "5px 0px" }}>
           Guardian information
         </p>
-        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-          <Col
-            className="gutter-row"
-            span={8}
-            style={{
-              marginBottom: "10px",
-            }}
-          >
+        <Row gutter={{ xs: 24, xl: 8, lg: 8, md: 24 }}>
+          <Col span={6} style={{ margin: "10px 0" }}>
             <FormInput
-              type="text"
               name="student.guardian.fatherName"
-              size="large"
               label="Father name"
+              size="large"
             />
           </Col>
-          <Col
-            className="gutter-row"
-            span={8}
-            style={{
-              marginBottom: "10px",
-            }}
-          >
+
+          <Col span={6} style={{ margin: "10px 0" }}>
             <FormInput
-              type="text"
               name="student.guardian.fatherOccupation"
-              size="large"
               label="Father occupation"
+              size="large"
             />
           </Col>
 
-          <Col
-            className="gutter-row"
-            span={8}
-            style={{
-              marginBottom: "10px",
-            }}
-          >
+          <Col span={6} style={{ margin: "10px 0" }}>
             <FormInput
-              type="text"
               name="student.guardian.fatherContactNo"
+              label="Father contact no."
               size="large"
-              label="Father contact no"
             />
           </Col>
 
-          <Col
-            className="gutter-row"
-            span={8}
-            style={{
-              marginBottom: "10px",
-            }}
-          >
+          <Col span={6} style={{ margin: "10px 0" }}>
             <FormInput
-              type="text"
               name="student.guardian.motherName"
-              size="large"
               label="Mother name"
-            />
-          </Col>
-          <Col
-            className="gutter-row"
-            span={8}
-            style={{
-              marginBottom: "10px",
-            }}
-          >
-            <FormInput
-              type="text"
-              name="student.guardian.motherOccupation"
               size="large"
-              label="Mother occupation"
             />
           </Col>
 
-          <Col
-            className="gutter-row"
-            span={8}
-            style={{
-              marginBottom: "10px",
-            }}
-          >
+          <Col span={6} style={{ margin: "10px 0" }}>
             <FormInput
-              type="text"
-              name="student.guardian.motherContactNo"
+              name="student.guardian.motherOccupation"
+              label="Mother occupation"
               size="large"
-              label="Mother contact no"
             />
-                </Col>
-                
-          <Col
-            className="gutter-row"
-            span={12}
-            style={{
-              marginBottom: "10px",
-            }}
-          >
-            <FormTextArea
+          </Col>
+
+          <Col span={6} style={{ margin: "10px 0" }}>
+            <FormInput
+              name="student.guardian.motherContactNo"
+              label="Mother contact no."
+              size="large"
+            />
+          </Col>
+
+          <Col span={6} style={{ margin: "10px 0" }}>
+            <FormInput
               name="student.guardian.address"
               label="Address"
-              rows={4}
+              size="large"
             />
           </Col>
         </Row>
       </div>
-    );
+    </>
+  );
 };
 
-export default StudentGuardianInfoForm;
+export default GuardianInfo;

@@ -66,7 +66,7 @@ const CreateDepartment = () => {
             </Col>
           </Row>
           <Button type="primary" htmlType="submit">
-            add
+            Add
           </Button>
         </Forms>
       </div>

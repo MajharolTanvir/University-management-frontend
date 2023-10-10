@@ -8,7 +8,7 @@ export interface ISelectFieldOptions {
   value: string;
 }
 
-interface ISelectField {
+export interface ISelectField {
   options: ISelectFieldOptions[];
   name: string;
   type?: string;
@@ -19,6 +19,7 @@ interface ISelectField {
   validation?: object;
   label?: string;
   defaultValue?: ISelectFieldOptions;
+  handleChange?: (el: string) => void;
 }
 
 const FormSelectFields = ({
@@ -29,6 +30,7 @@ const FormSelectFields = ({
   options,
   label,
   defaultValue,
+  handleChange,
 }: ISelectField) => {
   const { control } = useFormContext();
   return (
@@ -48,7 +50,7 @@ const FormSelectFields = ({
         name={name}
         render={({ field: { value, onChange } }) => (
           <Select
-            onChange={onChange}
+            onChange={handleChange ? handleChange : onChange}
             value={value}
             size={size}
             options={options}

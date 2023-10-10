@@ -1,30 +1,42 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
+import { getFromLocalStorage, setToLocalStorage } from "@/utils/local-storage";
 import { Button, message, Steps } from "antd";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import "../css/custom-steps.css";
-import { getFromLocalStorage, setToLocalStorage } from "@/utils/local-storage";
-import { useRouter } from "next/navigation";
 
 interface ISteps {
-  title: string;
+  title?: string;
   content?: React.ReactElement | React.ReactNode;
 }
 
 interface IStepsProps {
   steps: ISteps[];
+  persistKey: string;
   submitHandler: (el: any) => void;
   navigateLink?: string;
-  resolver?: any;
 }
 
-const StepperForm = ({ steps, submitHandler, navigateLink }: IStepsProps) => {
+const StepperForm = ({
+  steps,
+  submitHandler,
+  navigateLink,
+  persistKey,
+}: IStepsProps) => {
   const router = useRouter();
 
   const [current, setCurrent] = useState<number>(
     !!getFromLocalStorage("step")
       ? Number(JSON.parse(getFromLocalStorage("step") as string).step)
       : 0
+  );
+
+  const [savedValues, setSavedValues] = useState(
+    !!getFromLocalStorage(persistKey)
+      ? JSON.parse(getFromLocalStorage(persistKey) as string)
+      : ""
   );
 
   useEffect(() => {
@@ -41,13 +53,20 @@ const StepperForm = ({ steps, submitHandler, navigateLink }: IStepsProps) => {
 
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
 
-  const methods = useForm();
+  const methods = useForm({ defaultValues: savedValues });
+  const watch = methods.watch();
+
+  useEffect(() => {
+    setToLocalStorage(persistKey, JSON.stringify(watch));
+  }, [watch, persistKey, methods]);
+
   const { handleSubmit, reset } = methods;
 
   const handleStudentOnSubmit = (data: any) => {
     submitHandler(data);
     reset();
     setToLocalStorage("step", JSON.stringify({ step: 0 }));
+    setToLocalStorage(persistKey, JSON.stringify({}));
     navigateLink && router.push(navigateLink);
   };
 
