@@ -33,11 +33,13 @@ const CreateStudentPage = () => {
   const handleStudentSubmit = async (values: any) => {
     const obj = { ...values };
     const file = obj["file"];
+    console.log(file);
     delete obj["file"];
     const data = JSON.stringify(obj);
     const formData = new FormData();
     formData.append("file", file as Blob);
     formData.append("data", data);
+    console.log(formData);
     message.loading("Creating...");
     try {
       const res = await addStudentWithFormData(formData);
